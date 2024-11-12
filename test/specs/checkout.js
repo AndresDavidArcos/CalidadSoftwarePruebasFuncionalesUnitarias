@@ -1,24 +1,21 @@
-/* eslint-disable */
+
 const { Builder, By, until } = require('selenium-webdriver');
 const { login, addProductToCart } = require('../helpers');
 
-let driver;
 
-beforeAll(async () => {
-    driver = await new Builder().forBrowser('chrome').build();
-});
-
-afterAll(async () => {
-    await driver.quit();
-});
 
 async function testCustomerDetails({ email, firstName, lastName, address, postcode, phone, description, isValid }) {
+    let driver;
     try {
+        driver = await new Builder().forBrowser('chrome').build();
+
         await login(driver);
         await addProductToCart(driver);
 
         await driver.get('http://localhost:1111/checkout/information');
-        await driver.wait(until.elementLocated(By.id("shipEmail")), 10000);
+
+        // Esperar a que los campos sean interactuables
+        await driver.wait(until.elementIsVisible(driver.findElement(By.id("shipEmail"))), 10000);
 
         await driver.findElement(By.id("shipEmail")).clear();
         await driver.findElement(By.id("shipEmail")).sendKeys(email);
@@ -40,25 +37,26 @@ async function testCustomerDetails({ email, firstName, lastName, address, postco
 
         await driver.findElement(By.id("checkoutInformation")).click();
 
-        await driver.wait(until.urlContains('/checkout/shipping'), 10000);
-        if (isValid) {
+        const currentUrl = await driver.getCurrentUrl();
+        if (isValid && currentUrl.includes('/checkout/shipping')) {
             console.log(`Test Passed: ${description} | Datos: Email=${email}, Nombre=${firstName}, Apellido=${lastName}, Dirección=${address}, Código Postal=${postcode}, Teléfono=${phone}`);
+        } else if (!isValid && currentUrl.includes('/checkout/information')) {
+            console.log(`Test Passed (Invalid Class Rejected): ${description} | Datos: Email=${email}, Nombre=${firstName}, Apellido=${lastName}, Dirección=${address}, Código Postal=${postcode}, Teléfono=${phone}`);
         } else {
-            console.error(`Test Failed (Invalid Class Passed): ${description} | Datos: Email=${email}, Nombre=${firstName}, Apellido=${lastName}, Dirección=${address}, Código Postal=${postcode}, Teléfono=${phone}`);
-            throw new Error("Clase inválida fue aceptada.");
+            throw new Error(`Test Failed: ${description} | Datos: Email=${email}, Nombre=${firstName}, Apellido=${lastName}, Dirección=${address}, Código Postal=${postcode}, Teléfono=${phone}`);
         }
 
     } catch (error) {
         if (isValid) {
             console.error(`Test Failed: ${description} | Datos: Email=${email}, Nombre=${firstName}, Apellido=${lastName}, Dirección=${address}, Código Postal=${postcode}, Teléfono=${phone}`);
-            throw error;
-        } else {
-            console.log(`Test Passed (Invalid Class Rejected): ${description} | Datos: Email=${email}, Nombre=${firstName}, Apellido=${lastName}, Dirección=${address}, Código Postal=${postcode}, Teléfono=${phone}`);
         }
+        throw error;
+    } finally {
+        await driver.quit();
     }
 }
 
-//casos de prueba
+// casos de prueba
 const testCases = [
     { email: "valid@example.com", firstName: "John", lastName: "Doe", address: "123 Main St", postcode: "2000TW", phone: "123456789", description: "Caso válido", isValid: true },
 

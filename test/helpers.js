@@ -12,7 +12,6 @@ async function login(driver) {
 
 async function addProductToCart(driver) {
     await driver.get('http://localhost:1111/');
-
     const firstProduct = await driver.findElement(By.css('a[href*="/product/"]'));
     await firstProduct.click();
 
