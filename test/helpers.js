@@ -10,16 +10,16 @@ async function login(driver) {
     await driver.wait(until.urlIs('http://localhost:1111/customer/account'), 10000);
 }
 
-async function adminLogin(driver) {
+async function loginAsAdmin(driver) {
     await driver.get('http://localhost:1111/admin/login');
-    await driver.findElement(By.id("email")).sendKeys("owner@test.com");
-    await driver.findElement(By.id("password")).sendKeys("test");
-    await driver.findElement(By.id("loginForm")).click();
+    await driver.findElement(By.id('email')).sendKeys('owner@test.com');
+    await driver.findElement(By.id('password')).sendKeys('test');
+    await driver.findElement(By.id('loginForm')).click();
+    await driver.wait(until.urlIs('http://localhost:1111/admin/dashboard'), 10000);
 }
 
 async function addProductToCart(driver) {
     await driver.get('http://localhost:1111/');
-
     const firstProduct = await driver.findElement(By.css('a[href*="/product/"]'));
     await firstProduct.click();
 
@@ -34,4 +34,4 @@ async function addProductToCart(driver) {
     }, 10000);
 }
 
-module.exports = { login, adminLogin, addProductToCart };
+module.exports = { login, addProductToCart, loginAsAdmin};

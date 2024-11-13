@@ -7,9 +7,26 @@
     "start": "node app.js",
     "deploy": "node deploy.js",
     "testdata": "node lib/testdata.js",
-    "test": "mocha 'test/specs/**/*.js'",
+    "test": "jest",
     "dev": " pm2-dev start app.js",
     "lint": "eslint ./"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/specs/**/*.js"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-html-reporter",
+        {
+          "pageTitle": "Reporte de Pruebas",
+          "outputPath": "test-report.html",
+          "includeFailureMsg": true,
+          "includeSuiteFailure": true
+        }
+      ]
+    ]
   },
   "ava": {
     "serial": true,
@@ -88,6 +105,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "globby": "^11.0.1",
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^3.10.2",
     "less": "^3.12.2",
     "mocha": "^10.8.2",
     "mochawesome": "^7.1.3",

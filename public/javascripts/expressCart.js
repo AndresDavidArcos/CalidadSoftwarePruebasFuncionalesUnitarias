@@ -31,12 +31,12 @@ $(document).ready(function (){
                     userPassword: $('#userPassword').val()
                 }
             })
-            .done(function(msg){
-                showNotification(msg.message, 'success', false, '/admin/login');
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(msg){
+                    showNotification(msg.message, 'success', false, '/admin/login');
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
     });
 
@@ -45,7 +45,7 @@ $(document).ready(function (){
         $('body').addClass('pushy-open-right');
     });
 
-	// add the table class to all tables
+    // add the table class to all tables
     $('table').each(function(){
         $(this).addClass('table table-hover');
     });
@@ -123,9 +123,9 @@ $(document).ready(function (){
             url: '/customer/logout',
             data: {}
         })
-        .done(function(msg){
-            location.reload();
-        });
+            .done(function(msg){
+                location.reload();
+            });
     });
 
     $('#customerForgotten').validator().on('submit', function(e){
@@ -138,16 +138,16 @@ $(document).ready(function (){
                     email: $('#email').val()
                 }
             })
-            .done(function(msg){
-                showNotification(msg.message, 'success');
-            })
-            .fail(function(msg){
-                if(msg.message){
-                    showNotification(msg.responseJSON.message, 'danger');
-                    return;
-                }
-                showNotification(msg.responseText, 'danger');
-            });
+                .done(function(msg){
+                    showNotification(msg.message, 'success');
+                })
+                .fail(function(msg){
+                    if(msg.message){
+                        showNotification(msg.responseJSON.message, 'danger');
+                        return;
+                    }
+                    showNotification(msg.responseText, 'danger');
+                });
         }
     });
 
@@ -181,12 +181,12 @@ $(document).ready(function (){
                     orderComment: $('#orderComment').val()
                 }
             })
-            .done(function(){
-                window.location = '/checkout/shipping';
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(){
+                    window.location = '/checkout/shipping';
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
     });
 
@@ -199,12 +199,12 @@ $(document).ready(function (){
                 discountCode: $('#discountCode').val()
             }
         })
-        .done(function(msg){
-            showNotification(msg.message, 'success', true);
-        })
-        .fail(function(msg){
-            showNotification(msg.responseJSON.message, 'danger');
-        });
+            .done(function(msg){
+                showNotification(msg.message, 'success', true);
+            })
+            .fail(function(msg){
+                showNotification(msg.responseJSON.message, 'danger');
+            });
     });
 
     $('#removeDiscountCode').on('click', function(e){
@@ -214,12 +214,12 @@ $(document).ready(function (){
             url: '/checkout/removediscountcode',
             data: {}
         })
-        .done(function(msg){
-            showNotification(msg.message, 'success', true);
-        })
-        .fail(function(msg){
-            showNotification(msg.responseJSON.message, 'danger');
-        });
+            .done(function(msg){
+                showNotification(msg.message, 'success', true);
+            })
+            .fail(function(msg){
+                showNotification(msg.responseJSON.message, 'danger');
+            });
     });
 
     $('#loginForm').on('click', function(e){
@@ -233,12 +233,12 @@ $(document).ready(function (){
                     password: $('#password').val()
                 }
             })
-            .done(function(msg){
-                window.location = '/admin';
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(msg){
+                    window.location = '/admin';
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
         e.preventDefault();
     });
@@ -254,12 +254,12 @@ $(document).ready(function (){
                     loginPassword: $('#password').val()
                 }
             })
-            .done(function(msg){
-                window.location = '/customer/account';
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(msg){
+                    window.location = '/customer/account';
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
         e.preventDefault();
     });
@@ -276,23 +276,23 @@ $(document).ready(function (){
                     loginPassword: $('#customerLoginPassword').val()
                 }
             })
-            .done(function(msg){
-                var customer = msg.customer;
-                // Fill in customer form
-                $('#shipEmail').val(customer.email);
-                $('#shipFirstname').val(customer.firstName);
-                $('#shipLastname').val(customer.lastName);
-                $('#shipAddr1').val(customer.address1);
-                $('#shipAddr2').val(customer.address2);
-                $('#shipCountry').val(customer.country);
-                $('#shipState').val(customer.state);
-                $('#shipPostcode').val(customer.postcode);
-                $('#shipPhoneNumber').val(customer.phone);
-                location.reload();
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(msg){
+                    var customer = msg.customer;
+                    // Fill in customer form
+                    $('#shipEmail').val(customer.email);
+                    $('#shipFirstname').val(customer.firstName);
+                    $('#shipLastname').val(customer.lastName);
+                    $('#shipAddr1').val(customer.address1);
+                    $('#shipAddr2').val(customer.address2);
+                    $('#shipCountry').val(customer.country);
+                    $('#shipState').val(customer.state);
+                    $('#shipPostcode').val(customer.postcode);
+                    $('#shipPhoneNumber').val(customer.phone);
+                    location.reload();
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
         e.preventDefault();
     });
@@ -319,12 +319,12 @@ $(document).ready(function (){
                     orderComment: $('#orderComment').val()
                 }
             })
-            .done(function(){
-                showNotification('Customer saved', 'success');
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(){
+                    showNotification('Customer saved', 'success');
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
     });
 
@@ -386,13 +386,13 @@ $(document).ready(function (){
                 productVariant: $('#productVariant-' + $(this).attr('data-id')).val()
             }
         })
-		.done(function(msg){
-            updateCartDiv();
-            showNotification(msg.message, 'success');
-        })
-        .fail(function(msg){
-            showNotification(msg.responseJSON.message, 'danger');
-        });
+            .done(function(msg){
+                updateCartDiv();
+                showNotification(msg.message, 'success');
+            })
+            .fail(function(msg){
+                showNotification(msg.responseJSON.message, 'danger');
+            });
     });
 
     $(document).on('click', '.product-add-to-cart', function(e){
@@ -410,13 +410,13 @@ $(document).ready(function (){
                 productComment: $('#product_comment').val()
             }
         })
-		.done(function(msg){
-            updateCartDiv();
-            showNotification(msg.message, 'success');
-        })
-        .fail(function(msg){
-            showNotification(msg.responseJSON.message, 'danger');
-        });
+            .done(function(msg){
+                updateCartDiv();
+                showNotification(msg.message, 'success');
+            })
+            .fail(function(msg){
+                showNotification(msg.responseJSON.message, 'danger');
+            });
     });
 
     $('#product_quantity').on('keyup', function(e){
@@ -449,13 +449,13 @@ $(document).ready(function (){
                 url: '/product/addtocart',
                 data: { productId: $(this).attr('data-id') }
             })
-            .done(function(msg){
-                updateCartDiv();
-                showNotification(msg.message, 'success');
-            })
-            .fail(function(msg){
-                showNotification(msg.responseJSON.message, 'danger');
-            });
+                .done(function(msg){
+                    updateCartDiv();
+                    showNotification(msg.message, 'success');
+                })
+                .fail(function(msg){
+                    showNotification(msg.responseJSON.message, 'danger');
+                });
         }
     });
 
@@ -466,12 +466,12 @@ $(document).ready(function (){
             url: '/customer/check',
             data: {}
         })
-		.done(function(msg){
-            $('#reviewModal').modal('show');
-        })
-        .fail(function(){
-            showNotification('You need to be logged in to create a review', 'danger', false, '/customer/account');
-        });
+            .done(function(msg){
+                $('#reviewModal').modal('show');
+            })
+            .fail(function(){
+                showNotification('You need to be logged in to create a review', 'danger', false, '/customer/account');
+            });
     });
 
     // Create review
@@ -486,15 +486,15 @@ $(document).ready(function (){
                 rating: $('#review-rating').val()
             }
         })
-		.done(function(msg){
-            showNotification(msg.message, 'success', true);
-        })
-        .fail(function(msg){
-            if(msg.responseJSON.message === 'You need to be logged in to create a review'){
-                showNotification(msg.responseJSON.message, 'danger', false, '/customer/account');
-            }
-            showNotification(msg.responseJSON.message, 'danger');
-        });
+            .done(function(msg){
+                showNotification(msg.message, 'success', true);
+            })
+            .fail(function(msg){
+                if(msg.responseJSON.message === 'You need to be logged in to create a review'){
+                    showNotification(msg.responseJSON.message, 'danger', false, '/customer/account');
+                }
+                showNotification(msg.responseJSON.message, 'danger');
+            });
     });
 
     // On empty cart click
@@ -540,15 +540,15 @@ $(document).ready(function (){
     });
 
     if($('#input_notify_message').val() !== ''){
-		// save values from inputs
+        // save values from inputs
         var messageVal = $('#input_notify_message').val();
         var messageTypeVal = $('#input_notify_messageType').val();
 
-		// clear inputs
+        // clear inputs
         $('#input_notify_message').val('');
         $('#input_notify_messageType').val('');
 
-		// alert
+        // alert
         showNotification(messageVal, messageTypeVal || 'danger', false);
     }
 
@@ -620,13 +620,13 @@ function deleteFromCart(element){
             cartId: element.attr('data-cartid')
         }
     })
-    .done(function(msg){
-        updateCartDiv();
-        showNotification(msg.message, 'success');
-    })
-    .fail(function(msg){
-        showNotification(msg.responseJSON.message, 'danger');
-    });
+        .done(function(msg){
+            updateCartDiv();
+            showNotification(msg.message, 'success');
+        })
+        .fail(function(msg){
+            showNotification(msg.responseJSON.message, 'danger');
+        });
 }
 
 function cartUpdate(element){
@@ -650,12 +650,12 @@ function updateCart(element){
             quantity: element.val()
         }
     })
-    .done(function(msg){
-        updateCartDiv();
-    })
-    .fail(function(msg){
-        showNotification(msg.responseJSON.message, 'danger', true);
-    });
+        .done(function(msg){
+            updateCartDiv();
+        })
+        .fail(function(msg){
+            showNotification(msg.responseJSON.message, 'danger', true);
+        });
 }
 
 function updateCartDiv(){
@@ -663,47 +663,47 @@ function updateCartDiv(){
         method: 'GET',
         url: '/checkout/cartdata'
     })
-    .done(function(result){
-        // Update the cart div
-        var cart = result.cart;
-        var session = result.session;
-        var productHtml = '';
-        var totalAmount = numeral(session.totalCartAmount).format('0.00');
+        .done(function(result){
+            // Update the cart div
+            var cart = result.cart;
+            var session = result.session;
+            var productHtml = '';
+            var totalAmount = numeral(session.totalCartAmount).format('0.00');
 
-        // Work out the shipping
-        var shippingTotalAmt = numeral(session.totalCartShipping).format('0.00');
-        var shippingTotal = `${session.shippingMessage} :<strong id="shipping-amount">${result.currencySymbol}${shippingTotalAmt}</strong>`;
-        if(session.totalCartShipping === 0){
-            shippingTotal = `<span id="shipping-amount">${session.shippingMessage}</span>`;
-        }
+            // Work out the shipping
+            var shippingTotalAmt = numeral(session.totalCartShipping).format('0.00');
+            var shippingTotal = `${session.shippingMessage} :<strong id="shipping-amount">${result.currencySymbol}${shippingTotalAmt}</strong>`;
+            if(session.totalCartShipping === 0){
+                shippingTotal = `<span id="shipping-amount">${session.shippingMessage}</span>`;
+            }
 
-        var discountTotalAmt = numeral(session.totalCartDiscount).format('0.00');
-        var discountTotal = '';
-        if(session.totalCartDiscount > 0){
-            discountTotal = `
+            var discountTotalAmt = numeral(session.totalCartDiscount).format('0.00');
+            var discountTotal = '';
+            if(session.totalCartDiscount > 0){
+                discountTotal = `
                 <div class="text-right">
                     Discount: <strong id="discount-amount">${result.currencySymbol}${discountTotalAmt}</strong>
                 </div>`;
-        }
+            }
 
-        // If the cart has contents
-        if(cart){
-            $('#cart-empty').empty();
-            Object.keys(cart).forEach(function(cartId){
-                var item = cart[cartId];
-                // Setup the product
-                var productTotalAmount = numeral(item.totalItemPrice).format('0.00');
-                var variantHtml = '';
-                if(item.variantId){
-                    variantHtml += `<strong>Option:</strong> ${item.variantTitle}`;
-                }
-                var productImage = `<img class="img-fluid" src="/uploads/placeholder.png" alt="${item.title} product image"></img>`;
-                if(item.productImage){
-                    productImage = `<img class="img-fluid" src="${item.productImage}" alt="${item.title} product image"></img>`;
-                }
+            // If the cart has contents
+            if(cart){
+                $('#cart-empty').empty();
+                Object.keys(cart).forEach(function(cartId){
+                    var item = cart[cartId];
+                    // Setup the product
+                    var productTotalAmount = numeral(item.totalItemPrice).format('0.00');
+                    var variantHtml = '';
+                    if(item.variantId){
+                        variantHtml += `<strong>Option:</strong> ${item.variantTitle}`;
+                    }
+                    var productImage = `<img class="img-fluid" src="/uploads/placeholder.png" alt="${item.title} product image"></img>`;
+                    if(item.productImage){
+                        productImage = `<img class="img-fluid" src="${item.productImage}" alt="${item.title} product image"></img>`;
+                    }
 
-                // Setup the product html
-                productHtml += `
+                    // Setup the product html
+                    productHtml += `
                 <div class="d-flex flex-row bottom-pad-15">
                     <div class="p-2 cart-product">
                         <div class="row h-200">
@@ -745,17 +745,17 @@ function updateCartDiv(){
                         </div>
                     </div>
                 </div>`;
-            });
+                });
 
-            $('.cartBodyWrapper').html(productHtml);
-        }else{
-            $('.cartBodyWrapper').html('');
-        }
+                $('.cartBodyWrapper').html(productHtml);
+            }else{
+                $('.cartBodyWrapper').html('');
+            }
 
-        $('#cart-count').text(session.totalCartItems);
+            $('#cart-count').text(session.totalCartItems);
 
-        // Set the totals section
-        var cartTotalsHtml = `
+            // Set the totals section
+            var cartTotalsHtml = `
             <div class="d-flex flex-row">
                 <div class="cart-contents-shipping col-md-12 no-pad-right">
                     <div class="text-right">
@@ -769,26 +769,26 @@ function updateCartDiv(){
                 </div>
             </div>`;
 
-        var cartTotalsEmptyHtml = `
+            var cartTotalsEmptyHtml = `
             <div id="cart-empty" class="d-flex flex-row">
                 <div class="cart-contents-shipping col-md-12 no-pad-left>
                     Cart empty
                 </div>
             </div>`;
 
-        // Set depending on cart contents
-        if(cart){
-            $('.cartTotalsWrapper').html(cartTotalsHtml);
-            $('.cart-buttons').removeClass('d-none');
-        }else{
-            $('.cartTotalsWrapper').html(cartTotalsEmptyHtml);
-            $('.cart-buttons').addClass('d-none');
-        }
-        feather.replace();
-    })
-    .fail(function(result){
-        showNotification(result.responseJSON.message, 'danger');
-    });
+            // Set depending on cart contents
+            if(cart){
+                $('.cartTotalsWrapper').html(cartTotalsHtml);
+                $('.cart-buttons').removeClass('d-none');
+            }else{
+                $('.cartTotalsWrapper').html(cartTotalsEmptyHtml);
+                $('.cart-buttons').addClass('d-none');
+            }
+            feather.replace();
+        })
+        .fail(function(result){
+            showNotification(result.responseJSON.message, 'danger');
+        });
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -797,8 +797,8 @@ function emptyCart(){
         method: 'POST',
         url: '/product/emptycart'
     })
-    .done(function(msg){
-        updateCartDiv();
-        showNotification(msg.message, 'success', true);
-    });
+        .done(function(msg){
+            updateCartDiv();
+            showNotification(msg.message, 'success', true);
+        });
 }
